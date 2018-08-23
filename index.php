@@ -19,7 +19,7 @@
  */
 require_once "fb-callback.php";
 $response = $fb->get(
-    "/me?fields=id,first_name,last_name,email,picture,albums{picture,name},gender", 
+    "/me?fields=id,first_name,last_name,email,picture,albums{picture,name}", 
     $accessToken
 );
 $userData = $response->getGraphNode()->asArray();

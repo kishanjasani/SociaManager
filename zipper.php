@@ -195,7 +195,7 @@ class Zipper
             }    
             // clear the stat cache (created by filesize command)
             clearstatcache();
-            include_once 'unlink_directory.php';
+            include_once 'Unlink_Directory.php';
             $unlink_directory = new Unlink_Directory();
             $unlink_directory->removeDirectory($album_download_directory);
         }
