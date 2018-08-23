@@ -49,23 +49,10 @@ $loginUrl = $helper->getLoginUrl(
               background-repeat: no-repeat;
               background-size: cover;
             }
-            .wrapper {
-              text-align: center;
-            }
-            .button {
-              position: absolute;
-              top: 40%;
-              left:40%;
-            }
-            .text-space {
-              padding-left: 5px;
-            }
-
-            @media(max-width: 390px) {
-              .button {
-                position: absolute;
-                left:10%;
-              }
+            .loginBtn {
+              position:absolute;
+              top:50%;
+              left: 50%;
             }
         </style>
         <title>Social Manager</title>
@@ -74,8 +61,10 @@ $loginUrl = $helper->getLoginUrl(
   <body class="login-back">
       <div>      
           <div class="row wrapper">
-            <div class="col s12">
-              <?php echo '<a href="' . htmlspecialchars($loginUrl) . '" class="btn btn-large blue darken-3 button"><i class="fab fa-facebook"></i><span class="text-space">Login With Facebook</span></a>'; ?>
+            <div class="col s12 loginBtn">
+            <center>
+                <?php echo '<a href="' . htmlspecialchars($loginUrl) . '" class="btn btn-large blue darken-3 button"><i class="fab fa-facebook"></i><span class="text-space">Login With Facebook</span></a>'; ?>
+            </center>
             </div>
           </div>
       </div>

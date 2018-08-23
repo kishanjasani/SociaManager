@@ -41,72 +41,7 @@ $_SESSION['email']=$userData['email'];
     crossorigin="anonymous"></script>
     <!--Let browser know website is optimized for mobile-->
     <style>
-      .img-decore{
-        width: 100%;
-        height:225px;
-        object-fit:cover;
-      }
-      .card-content [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
-        opacity: 1;
-        pointer-events: all;
-      }
-
-      .download-process {
-          position: fixed;
-          bottom: 15px;
-          right: 15px;
-          width: 312px;
-          background-color: #ffffff;
-          display: none;
-          border-radius: 5px;
-      }
-
-      .loadermessage {
-        margin-top: 40px;
-      }
       
-      .single-download{
-        width: 80%;
-      }
-
-      .loader {
-        border: 16px solid #f3f3f3;
-        border-radius: 50%;
-        border-top: 16px solid #3498db;
-        width: 100px;
-        height: 100px;
-        margin:-50px 0 0 -50px;
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        background-color: #ffffff;
-        z-index: 99;
-        -webkit-animation: spin 2s linear infinite; /* Safari */
-        animation: spin 2s linear infinite;
-      }
-
-      .download-process .loaderprocess {
-          border: 16px solid #f3f3f3;
-          border-radius: 50%;
-          border-top: 16px solid #3498db;
-          width: 100px;
-          height: 100px;
-          float: left;
-          margin-right: 10px;
-          -webkit-animation: spin 2s linear infinite; /* Safari */
-          animation: spin 2s linear infinite;
-      }
-
-      /* Safari */
-      @-webkit-keyframes spin {
-        0% { -webkit-transform: rotate(0deg); }
-        100% { -webkit-transform: rotate(360deg); }
-      }
-
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
     </style>
   </head>
 
@@ -235,17 +170,14 @@ $_SESSION['email']=$userData['email'];
                             <div class="modal-trigger" href="#<?php echo $albumm['id'] ?>">
                                 <img src="<?php echo $albumm['picture']['url']?>" class="img-decore">
                             </div>
-                            <center>
-                      
-                            </center>
                         </div>
                         <div class="card-content">
                           <center>
-                           <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light red single-download"><i class="material-icons">get_app</i></button><br/><br/>
-                            <input type="checkbox"  class="select-album" value="<?php echo $albumm['id'].','.$albumm['name'];?>" class="filled-in" />
-                            <br/>
-                            <span class="card-title"><?php echo $albumm['name'];?></span>
-                            <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light blue move-single-album">Move to Drive</button>
+                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light red single-download"><i class="material-icons">get_app</i></button><br/><br/>
+                              <input type="checkbox"  class="select-album" value="<?php echo $albumm['id'].','.$albumm['name'];?>" class="filled-in" />
+                              <br/>
+                              <span class="card-title"><?php echo $albumm['name'];?></span>
+                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light blue move-single-album">Move to Drive</button>
                           </center>
                         </div>
                     </div>
@@ -267,29 +199,25 @@ $_SESSION['email']=$userData['email'];
 
     </section>
 
-    
+    <div id="display-response"></div>
 
-      <div id="display-response">
-        
-      </div>
+    <div class="loader"></div>
 
-      <div class="loader"></div>
+    <div class="download-process">
+        <div class="loaderprocess"></div>
+        <h6 class="loadermessage">Loading...!!</h6>
+    </div>
 
-      <div class="download-process">
-          <div class="loaderprocess"></div>
-          <h6 class="loadermessage">Loading...!!</h6>
-      </div>
-
-      <div id="modal" class="modal">
-        <center>
-          <div class="modal-content">
-            
-          </div>
-        </center>
-        <div class="modal-footer">
-          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    <div id="modal" class="modal">
+      <center>
+        <div class="modal-content">
+          
         </div>
+      </center>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
       </div>
+    </div>
 
     <?php
     $google_access_token= "";

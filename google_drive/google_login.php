@@ -29,17 +29,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
     $client->setAccessToken($_SESSION['google_access_token']);
 
     $drive = new Google_Service_Drive($client);
-    /**
-     * Remove the album directory
-     * 
-     * @param String $accessToken access token of facebook
-     * @param String $albumId     album id to store data into drive
-     * @param String $albumName   album name 
-     * @param String $fb          facebook object
-     * @param String $drive       drive object
-     * 
-     * @return "" 
-     */
+
     $rootFolderName = 'facebook_'.$_SESSION['userid'].'_albums';
             $fileMetaData = new Google_Service_Drive_DriveFile(
                 array(
@@ -51,7 +41,18 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
                 array('fields' => 'id')
             );
             $parentFolderId = $parentFolder->getId();
-
+    /**
+     * Remove the album directory
+     * 
+     * @param String $accessToken    access token of facebook
+     * @param String $albumId        album id to store data into drive
+     * @param String $albumName      album name 
+     * @param String $fb             facebook object
+     * @param String $drive          drive object
+     * @param String $parentFolderId ParentId
+     * 
+     * @return "" 
+     */
     function moveToDrive($accessToken, $albumId, $albumName, $fb, $drive, $parentFolderId) 
     {
 
@@ -92,14 +93,12 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
                 print "An error occurred: " . $e->getMessage();
             }
         }
-        $response = "File successfully backuped!!!";
-        return $response;
     }
 
     if (isset($_GET['single_album']) && !empty($_GET['single_album'])) {
         $response = '<span>Sorry due to some reasons albums is not moved to goofle drive.</span>';
         $single_album = explode(",", $_GET['single_album']);
-        $response = moveToDrive(
+        moveToDrive(
             $accessToken, 
             $single_album[0], 
             $single_album[1], 
@@ -107,7 +106,8 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
             $drive,
             $parentFolderId
         );
-        return $response;
+        $response = "Your Album successfully backuped!!!";
+        echo $response;
     }
 
     if (isset($_GET['selected_albums']) && !empty($_GET['selected_albums'])) {
@@ -115,7 +115,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
         $selected_albums = explode("-", $_GET['selected_albums']);
         foreach ( $selected_albums as $selected_album ) {
             $selected_album = explode(",", $selected_album);
-            $response .= moveToDrive(
+            moveToDrive(
                 $accessToken, 
                 $selected_album[0], 
                 $selected_album[1], 
@@ -124,7 +124,8 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
                 $parentFolderId
             );
         }
-        return $response;
+        $response = "Your Albums successfully backuped!!!";
+        echo $response;
     }
 
     if (isset($_GET['all_albums']) && !empty($_GET['all_albums'])) {
@@ -137,7 +138,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
 
             if (!empty($albums)) {
                 foreach ($albums as $album) {
-                    $response .= moveToDrive(
+                    moveToDrive(
                         $accessToken, 
                         $album['id'], 
                         $album['name'], 
@@ -146,7 +147,8 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
                         $parentFolderId
                     );
                 }
-                return $response;
+                $response = "Your All Albums successfully backuped!!!";
+                echo $response;
             }
         }
     }
