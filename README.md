@@ -1,6 +1,6 @@
 ## Facebook Albums Downloader and Backup albums to drive
 
-Application Demo - https://rtfbchallenge.000webhostapp.com/
+Live Application Demo - https://rtfbchallenge.000webhostapp.com/
 
 This is a core php Application with expressive, elegant syntax which  allows a user to do following activities:
 
