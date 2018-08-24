@@ -80,6 +80,7 @@ In the project's root directory download Facebook PHP SDK For that..
 Run this command: 
 ```sh
 composer require facebook/graph-sdk
+composer require google/apiclient:"^2.0"
 ```
 
 => go to config.php
