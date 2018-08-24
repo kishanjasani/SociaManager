@@ -46,6 +46,8 @@ Materialize Css
 A modern responsive front-end framework based on Material Design.
 Materialize is the most popular HTML, CSS, and JS framework for developing responsive. <a href="https://materializecss.com/">For more information</a>
 
+Slider Design Used : <a href="https://www.w3schools.com/howto/howto_js_slideshow.asp">W3Schools's example</a>
+
 Platform : PHP
 
 Scripting Languages:
