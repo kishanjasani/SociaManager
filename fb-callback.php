@@ -30,11 +30,11 @@ if (isset($_SESSION['accessToken'])) {
             header('Location: https://localhost:8443/SociaManager/login.php');
             exit();
         }
-    } catch(Facebook\Exceptions\FacebookResponseException $e) {
+    } catch (Facebook\Exceptions\FacebookResponseException $e) {
         // When Graph returns an error
         echo 'Graph returned an error: ' . $e->getMessage();
         exit;
-    } catch(Facebook\Exceptions\FacebookSDKException $e) {
+    } catch (Facebook\Exceptions\FacebookSDKException $e) {
         // When validation fails or other local issues
         echo 'Facebook SDK returned an error: ' . $e->getMessage();
         exit;
@@ -51,7 +51,7 @@ if (isset($_SESSION['accessToken'])) {
     // If you know the user ID this access token belongs to, you can validate it here
     $tokenMetadata->validateExpiration();
 
-    if (! $accessToken->isLongLived()) {
+    if (!$accessToken->isLongLived()) {
         // Exchanges a short-lived access token for a long-lived one
         try {
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);

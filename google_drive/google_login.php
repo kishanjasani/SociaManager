@@ -19,10 +19,10 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
  */
 ini_set('max_execution_time', 999999);
-require_once __DIR__.DIRECTORY_SEPARATOR.'gClient.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'gClient.php';
 require_once "../fb-callback.php";
 
-$gClient =new CreateGoogleClient();
+$gClient = new CreateGoogleClient();
 $client = $gClient->createClient();
 
 if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token']) {
@@ -30,7 +30,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
 
     $drive = new Google_Service_Drive($client);
 
-    $rootFolderName = 'facebook_'.$_SESSION['userid'].'_albums';
+    $rootFolderName = 'facebook_' . $_SESSION['userid'] . '_albums';
             $fileMetaData = new Google_Service_Drive_DriveFile(
                 array(
                     'name' => $rootFolderName,
@@ -67,13 +67,13 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
             array('fields' => 'id')
         );
 
-        $responseImg = $fb->get($albumId.'/photos?fields=source', $accessToken);
+        $responseImg = $fb->get($albumId . '/photos?fields=source', $accessToken);
         $graphNodeImg = $responseImg->getGraphEdge();
         $resultImg = json_decode($graphNodeImg);
 
         foreach ($resultImg as $images) {
             $url = $images->source;
-            $img = $images->id.".jpeg";
+            $img = $images->id . ".jpeg";
             $folderId = $SubFolder->id;
             $fileMetadata = new Google_Service_Drive_DriveFile(
                 array(
@@ -88,7 +88,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
                     'data' => $fileContent, 'mimeType' => 'image/jpeg',
                     'uploadType' => 'multipart', 'fields' => 'id')
                 );
-            }catch (Exception $e) {
+            } catch (Exception $e) {
                 $response = "Due to some reason uploading to drive is failed!";
                 print "An error occurred: " . $e->getMessage();
             }
@@ -113,7 +113,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
     if (isset($_GET['selected_albums']) && !empty($_GET['selected_albums'])) {
         $response = '<span>Sorry due to some reasons albums is not moved to goofle drive.</span>';
         $selected_albums = explode("-", $_GET['selected_albums']);
-        foreach ( $selected_albums as $selected_album ) {
+        foreach ($selected_albums as $selected_album) {
             $selected_album = explode(",", $selected_album);
             moveToDrive(
                 $accessToken, 

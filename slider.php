@@ -22,12 +22,12 @@ require_once "fb-callback.php";
 if (isset($_GET['albumId'])) {
     $albumId = $_GET['albumId'];
     $response_albums = $fb->get($albumId . "/photos?fields=images,id", $accessToken);
-    $albums=$response_albums->getGraphEdge()->asArray(); 
-    $slides =""; 
+    $albums = $response_albums->getGraphEdge()->asArray(); 
+    $slides = ""; 
     foreach ($albums as $album) {
         $albumUrl = $album['images'][0]['source'];
         $slides .= '<div class="mySlides fade">';
-        $slides .= '<img src="'. $albumUrl .'" style="width:100%; height: 400px"></div>';
+        $slides .= '<img src="' . $albumUrl . '" style="width:100%; height: 400px"></div>';
     }
     echo $slides;
 }

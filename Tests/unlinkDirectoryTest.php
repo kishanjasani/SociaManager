@@ -37,7 +37,7 @@ class UnlinkDirectoryTest extends PHPUnit_Framework_TestCase
      * 
      * @return ""
      */
-    function testRemoveDirectory( $directory = null ) 
+    function testRemoveDirectory($directory = null) 
     {
         $actual = $this->unlinkDirectory->removeDirectory($directory);
         $this->assertEquals($actual, $actual);
