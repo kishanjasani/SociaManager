@@ -1,4 +1,5 @@
 ## Facebook Albums Downloader and Backup albums to drive
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kishanjasani/SociaManager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kishanjasani/SociaManager/?branch=master)
 
 Live Application Demo - https://rtfbchallenge.000webhostapp.com/
 
