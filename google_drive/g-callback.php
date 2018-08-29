@@ -19,10 +19,10 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
  */
 require_once 'gClient.php';
-$gClient =new CreateGoogleClient();
+$gClient = new CreateGoogleClient();
 $client = $gClient->createClient();
 
-if (! isset($_GET['code'])) {
+if (!isset($_GET['code'])) {
     $auth_url = $client->createAuthUrl();
     header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
 } else {

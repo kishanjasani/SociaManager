@@ -24,7 +24,7 @@ $response = $fb->get(
 );
 $userData = $response->getGraphNode()->asArray();
 $_SESSION['userid'] = $userData['id'];
-$_SESSION['email']=$userData['email'];
+$_SESSION['email'] = $userData['email'];
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +93,7 @@ $_SESSION['email']=$userData['email'];
                     <img src="<?php echo $userData['picture']['url'] ?>" alt="Profile Picture" class="circle">
                   </a>
                   <a href="#">
-                    <span class="name white-text"><?php echo $userData['first_name'] ." ".$userData['last_name'] ?></span>
+                    <span class="name white-text"><?php echo $userData['first_name'] . " " . $userData['last_name'] ?></span>
                   </a>
                   <a href="#">
                     <span class="email white-text"><?php echo $userData['email'] ?></span>
@@ -126,7 +126,7 @@ $_SESSION['email']=$userData['email'];
                     <div class="profilepic">
                       <img style="margin-top: 40px; margin-left:55px;" src="<?php echo $userData['picture']['url'] ?>" alt="Profile Picture" class="materialboxed circle responsive-img">
                     </div>
-                    <p class="center teal-text" style="font-size: 25px;"><strong><?php echo $userData['first_name'] ." ". $userData['last_name'] ?></strong><p>            
+                    <p class="center teal-text" style="font-size: 25px;"><strong><?php echo $userData['first_name'] . " " . $userData['last_name'] ?></strong><p>            
                   <center>
                 </div>
                 <div class="col l6 profile-detaile">
@@ -173,11 +173,11 @@ $_SESSION['email']=$userData['email'];
                         </div>
                         <div class="card-content">
                           <center>
-                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light red single-download"><i class="material-icons">get_app</i></button><br/><br/>
-                              <input type="checkbox"  class="select-album" value="<?php echo $albumm['id'].','.$albumm['name'];?>" class="filled-in" />
+                              <button type="button" rel="<?php echo $albumm['id'] . ',' . $albumm['name']; ?>" class="btn waves-effect waves-light red single-download"><i class="material-icons">get_app</i></button><br/><br/>
+                              <input type="checkbox"  class="select-album" value="<?php echo $albumm['id'] . ',' . $albumm['name']; ?>" class="filled-in" />
                               <br/>
-                              <span class="card-title"><?php echo $albumm['name'];?></span>
-                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light blue move-single-album">Move to Drive</button>
+                              <span class="card-title"><?php echo $albumm['name']; ?></span>
+                              <button type="button" rel="<?php echo $albumm['id'] . ',' . $albumm['name']; ?>" class="btn waves-effect waves-light blue move-single-album">Move to Drive</button>
                           </center>
                         </div>
                     </div>
@@ -220,7 +220,7 @@ $_SESSION['email']=$userData['email'];
     </div>
 
     <?php
-    $google_access_token= "";
+    $google_access_token = "";
     if (isset($_SESSION['google_access_token'])) {
         $google_access_token = $_SESSION['google_access_token'];
     } 

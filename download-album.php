@@ -21,7 +21,7 @@
 require_once "fb-callback.php";
 
 $zip_folder = "";
-$album_download_directory = 'public/'.uniqid().'/';
+$album_download_directory = 'public/' . uniqid() . '/';
 mkdir($album_download_directory, 0777, true);
 
 /**
@@ -47,7 +47,7 @@ function Download_album(
 
     $album_directory = $album_download_directory.$album_name;
     if (!file_exists($album_directory)) {
-         mkdir($album_directory, 0777);
+            mkdir($album_directory, 0777);
     }
 
     $i = 1;
