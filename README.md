@@ -83,8 +83,19 @@ In the project's root directory download Facebook PHP SDK For that..
 Run this command: 
 ```sh
 composer require facebook/graph-sdk
-composer require google/apiclient:"^2.0"
+composer require google/apiclient:"^3.0"
 ```
+Or
+if you are using my project then you have use ```sh composer install ```
+Note : you have to make changes in facebook graph api's => Facebook/Helpers/FacebookRedirectLoginHelper.php file
+in that you have to make changes
+
+$redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state']);
+
+to 
+
+$redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state', 'enforce_https']);
+
 
 => go to config.php
 	Set:
