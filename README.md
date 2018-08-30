@@ -90,11 +90,11 @@ if you are using my project then you have use ```sh composer install ```
 Note : you have to make changes in facebook graph api's => Facebook/Helpers/FacebookRedirectLoginHelper.php file
 in that you have to make changes
 
-$redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state']);
+```sh $redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state']); ```
 
 to 
 
-$redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state', 'enforce_https']);
+```sh $redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state', 'enforce_https']); ```
 
 
 => go to config.php
