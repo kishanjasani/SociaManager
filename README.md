@@ -86,6 +86,7 @@ composer require facebook/graph-sdk
 composer require google/apiclient:"^3.0"
 ```
 Or
+
 if you are using my project then you have use ```sh composer install ```
 Note : you have to make changes in facebook graph api's => Facebook/Helpers/FacebookRedirectLoginHelper.php file
 in that you have to make changes
