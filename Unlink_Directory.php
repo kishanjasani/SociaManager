@@ -23,7 +23,7 @@ class Unlink_Directory
      * 
      * @param String $directory Name of the directory
      * 
-     * @return String 
+     * @return "0" 
      */
     function removeDirectory($directory) 
     {

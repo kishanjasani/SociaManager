@@ -51,7 +51,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
      * @param String $drive          drive object
      * @param String $parentFolderId ParentId
      * 
-     * @return "Created album in gogle drive" 
+     * @return "0" 
      */
     function moveToDrive($accessToken, $albumId, $albumName, $fb, $drive, $parentFolderId) 
     {

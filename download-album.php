@@ -35,7 +35,7 @@ $main_arr = array();
  * @param String $album_name               Album name
  * @param String $fb                       Facebook Object
  * 
- * @return ""
+ * @return 0
  */
 function Download_album(
     $accessToken, 
@@ -72,7 +72,7 @@ function Download_album(
  * @param String $album_name  Album name
  * @param String $fb          Facebook Object
  * 
- * @return ""
+ * @return 0
  */
 function Export_album($accessToken, $album_id, $album_name, $fb) 
 {

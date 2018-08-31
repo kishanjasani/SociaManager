@@ -76,7 +76,7 @@ class Zipper
      * @param String $folder        folder name
      * @param String $maxsize       maximum size of the folder
      * 
-     * @return ""
+     * @return array
      */
     public function processZip($foldercontent, $folder, $maxsize)
     {
@@ -139,7 +139,7 @@ class Zipper
     /**
      * It will get the memory limit
      * 
-     * @return ""
+     * @return "$memory_limit"
      */
     public function getMemoryLimit()
     {
@@ -159,7 +159,7 @@ class Zipper
      * 
      * @param String $album_download_directory folder will be zip 
      * 
-     * @return ""
+     * @return "$zipfilename"
      */
     public function makeZip($album_download_directory) 
     {
@@ -205,7 +205,7 @@ class Zipper
      * 
      * @param String $album_download_directory folder will be zip 
      * 
-     * @return ""
+     * @return "$response"
      */
     public function getZip($album_download_directory) 
     {
