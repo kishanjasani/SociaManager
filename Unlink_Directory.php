@@ -25,7 +25,7 @@ class Unlink_Directory
      * 
      * @return String 
      */
-    function removeDirectory( $directory ) 
+    function removeDirectory($directory) 
     {
         if (isset($directory)) {
             foreach (glob("{$directory}/*") as $file) {

@@ -21,7 +21,7 @@
 require_once "fb-callback.php";
 
 $zip_folder = "";
-$album_download_directory = 'public/'.uniqid().'/';
+$album_download_directory = 'public/' . uniqid() . '/';
 mkdir($album_download_directory, 0777, true);
 
 $main_arr = array();
@@ -35,7 +35,7 @@ $main_arr = array();
  * @param String $album_name               Album name
  * @param String $fb                       Facebook Object
  * 
- * @return "Downloaded Album"
+ * @return ""
  */
 function Download_album(
     $accessToken, 
@@ -53,7 +53,7 @@ function Download_album(
     $arr_alb = $request_albums_photo->getGraphEdge();
     
     $i = 0;
-    $resultAlbum = getAlbum($fb, $arr_alb, $i);
+    $resultAlbum = getAlbum($fb, $arr_alb, $album_name, $i);
     $count = 1;
     foreach ($resultAlbum as $album_photo) {
         file_put_contents(
@@ -72,17 +72,17 @@ function Download_album(
  * @param String $album_name  Album name
  * @param String $fb          Facebook Object
  * 
- * @return "Exported Albums"
+ * @return ""
  */
 function Export_album($accessToken, $album_id, $album_name, $fb) 
 {
-    $request_albums_photo = $fb->get($album_id ."/photos?fields=images&limit=5", $accessToken);
+    $request_albums_photo = $fb->get($album_id . "/photos?fields=images&limit=5", $accessToken);
     $arr_alb = $request_albums_photo->getGraphEdge();
     $i = 0;
     $resultAlbum = getAlbum($fb, $arr_alb, $album_name, $i);
     
     $response_json = json_encode(array($album_name => $resultAlbum), JSON_PRETTY_PRINT);
-    $jsonFilename = './public/jsonData/fb-album_'.date("Y-m-d").'_'.date("H-i-s").'.json';
+    $jsonFilename = './public/jsonData/fb-album_' . date("Y-m-d") . '_' . date("H-i-s") . '.json';
     $jsonFile = fopen($jsonFilename, "a") or die("Unable to open file!");
     fwrite($jsonFile, $response_json);
     fclose($jsonFile);
@@ -99,12 +99,11 @@ function Export_album($accessToken, $album_id, $album_name, $fb)
  * @param String $album_name Album name
  * @param String $i          taking care of index value of array 
  * 
- * @return "Get Albums array"
+ * @return "$main_arr"
  */
 function getAlbum($fb, $arr_alb, $album_name, $i)
 {
     global $main_arr;
-    
     foreach ($arr_alb as $graphNode) {
         $main_arr[$i]['images'] = $graphNode['images'][0]['source'];
         $i++;

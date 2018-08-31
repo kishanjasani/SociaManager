@@ -29,7 +29,7 @@ class CreateGoogleClient
     /**
      * Create a google Client for move album to Drive
      * 
-     * @return GoogleClient
+     * @return $client
      */
     function createClient()
     {

@@ -245,7 +245,7 @@ $_SESSION['email']=$userData['email'];
     } 
     ?>
 
-    <div id="" class="g-access-token"><?php if($google_access_token) echo "Hello"; else echo ""; ?></div>
+    <div id="" class="g-access-token"><?php if ($google_access_token) echo "Hello"; else echo ""; ?></div>
 
     <!-- Footer -->
 

@@ -30,7 +30,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
 
     $drive = new Google_Service_Drive($client);
 
-    $rootFolderName = 'facebook_'.$_SESSION['userid'].'_albums';
+    $rootFolderName = 'facebook_' . $_SESSION['userid'] . '_albums';
     $fileMetaData = new Google_Service_Drive_DriveFile(
         array(
             'name' => $rootFolderName,
@@ -51,7 +51,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
      * @param String $drive          drive object
      * @param String $parentFolderId ParentId
      * 
-     * @return "" 
+     * @return "Created album in gogle drive" 
      */
     function moveToDrive($accessToken, $albumId, $albumName, $fb, $drive, $parentFolderId) 
     {
@@ -67,7 +67,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
             array('fields' => 'id')
         );
 
-        $request_albums_photo = $fb->get($albumId ."/photos?fields=images&limit=5", $accessToken);
+        $request_albums_photo = $fb->get($albumId . "/photos?fields=images&limit=100", $accessToken);
         $arr_alb = $request_albums_photo->getGraphEdge();
         $i = 0;
         $resultAlbum = getAlbum($fb, $arr_alb, $i);
@@ -128,7 +128,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
     if (isset($_GET['selected_albums']) && !empty($_GET['selected_albums'])) {
         $response = '<span>Sorry due to some reasons albums is not moved to goofle drive.</span>';
         $selected_albums = explode("-", $_GET['selected_albums']);
-        foreach ( $selected_albums as $selected_album ) {
+        foreach ($selected_albums as $selected_album) {
             $selected_album = explode(",", $selected_album);
             moveToDrive(
                 $accessToken, 
