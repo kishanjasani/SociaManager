@@ -8,7 +8,7 @@
  * @category Album_Manager
  * @package  Zipper
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://localhost/SocialManager/privacy_policy/privacy_policy.php 
+ * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
@@ -19,10 +19,10 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
  */
 ini_set('max_execution_time', 999999);
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'gClient.php';
+require_once __DIR__.'/gClient.php';
 require_once "../fb-callback.php";
 
-$gClient = new CreateGoogleClient();
+$gClient =new CreateGoogleClient();
 $client = $gClient->createClient();
 
 if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token']) {
@@ -30,17 +30,17 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
 
     $drive = new Google_Service_Drive($client);
 
-    $rootFolderName = 'facebook_' . $_SESSION['userid'] . '_albums';
-            $fileMetaData = new Google_Service_Drive_DriveFile(
-                array(
-                    'name' => $rootFolderName,
-                    'mimeType' => 'application/vnd.google-apps.folder')
-            );
-            $parentFolder = $drive->files->create(
-                $fileMetaData, 
-                array('fields' => 'id')
-            );
-            $parentFolderId = $parentFolder->getId();
+    $rootFolderName = 'facebook_'.$_SESSION['userid'].'_albums';
+    $fileMetaData = new Google_Service_Drive_DriveFile(
+        array(
+            'name' => $rootFolderName,
+            'mimeType' => 'application/vnd.google-apps.folder')
+    );
+    $parentFolder = $drive->files->create(
+        $fileMetaData, 
+        array('fields' => 'id')
+    );
+    $parentFolderId = $parentFolder->getId();
     /**
      * Remove the album directory
      * 
@@ -67,13 +67,14 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
             array('fields' => 'id')
         );
 
-        $responseImg = $fb->get($albumId . '/photos?fields=source', $accessToken);
-        $graphNodeImg = $responseImg->getGraphEdge();
-        $resultImg = json_decode($graphNodeImg);
-
-        foreach ($resultImg as $images) {
-            $url = $images->source;
-            $img = $images->id . ".jpeg";
+        $request_albums_photo = $fb->get($albumId ."/photos?fields=images&limit=5", $accessToken);
+        $arr_alb = $request_albums_photo->getGraphEdge();
+        $i = 0;
+        $resultAlbum = getAlbum($fb, $arr_alb, $i);
+        $count = 1;
+        foreach ($resultAlbum as $images) {
+            $url = $images['images'];
+            $img = $count.".jpeg";
             $folderId = $SubFolder->id;
             $fileMetadata = new Google_Service_Drive_DriveFile(
                 array(
@@ -88,11 +89,25 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
                     'data' => $fileContent, 'mimeType' => 'image/jpeg',
                     'uploadType' => 'multipart', 'fields' => 'id')
                 );
-            } catch (Exception $e) {
-                $response = "Due to some reason uploading to drive is failed!";
+            }catch (Exception $e) {
                 print "An error occurred: " . $e->getMessage();
             }
+            $count++;
         }
+    }
+
+    function getAlbum($fb,$arr_alb,$i)
+    {
+        global $main_arr;
+        foreach ($arr_alb as $graphNode) {
+            $main_arr[$i]['images'] = $graphNode['images'][0]['source'];
+            $i++;
+        }
+        $arr_alb_ar = $fb->next($arr_alb);
+        if(!empty($arr_alb_ar)) {
+            getAlbum($fb, $arr_alb_ar, $i);
+        }
+        return $main_arr;
     }
 
     if (isset($_GET['single_album']) && !empty($_GET['single_album'])) {
@@ -113,7 +128,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
     if (isset($_GET['selected_albums']) && !empty($_GET['selected_albums'])) {
         $response = '<span>Sorry due to some reasons albums is not moved to goofle drive.</span>';
         $selected_albums = explode("-", $_GET['selected_albums']);
-        foreach ($selected_albums as $selected_album) {
+        foreach ( $selected_albums as $selected_album ) {
             $selected_album = explode(",", $selected_album);
             moveToDrive(
                 $accessToken, 
@@ -154,7 +169,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
     }
 
 } else {
-    $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . '/SociaManager/google_drive/g-callback.php';
+    $redirect_uri = 'https://localhost:8443/SociaManager/google_drive/g-callback.php';
     header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
 }
 ?>

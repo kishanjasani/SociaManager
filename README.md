@@ -31,6 +31,9 @@ Application fetches all Albums which is added by user or in which user is tagged
 - There is a "Move all" button displayed in the navigation bar, which will upload all the albums under the same parent folder mentioned above alongwith each child folder for all the albums.
 - During the time of moving to drive process is going on, the user will be shown a nice pre-loader for albums while the user awaits the file.
 
+## Aditional :-
+    You also can export the the album data in json format by clicking on export data button on the album. so you can use that data in your other website as well by importing this json file.
+
 Library Used:
 ==========================================================
 Facebook PHP SDK
@@ -87,15 +90,15 @@ composer require google/apiclient:"^3.0"
 ```
 Or
 
-if you are using my project then you have use ```sh composer install ```
-Note : you have to make changes in facebook graph api's => Facebook/Helpers/FacebookRedirectLoginHelper.php file
-in that you have to make changes
+if you are using my project then you have use `composer install ` command.
+<p><b>NOTE : you have to make changes in facebook graph api's => Facebook/Helpers/FacebookRedirectLoginHelper.php file
+in that you have to make changes</b></p>
 
-```sh $redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state']); ```
+`$redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state']);`
 
 to 
 
-```sh $redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state', 'enforce_https']); ```
+`$redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state', 'enforce_https']);`
 
 
 => go to config.php

@@ -17,15 +17,15 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
  */
-    require_once __DIR__ . "/config.php";
+  require_once __DIR__ . "/config.php";
 
 if (isset($_SESSION['accessToken'])) {
-    header('Location: https://rtfbchallenge.000webhostapp.com/index.php'); 
+    header('Location: https://localhost:8443/SociaManager/index.php'); 
     exit();
 }
-$permissions = ['email', 'user_gender', 'user_location', 'user_photos'];
+$permissions = ['email','user_gender','user_location','user_photos'];
 $loginUrl = $helper->getLoginUrl(
-    'https://rtfbchallenge.000webhostapp.com/index.php', 
+    'https://localhost:8443/SociaManager/index.php', 
     $permissions
 );
 ?>

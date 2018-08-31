@@ -7,7 +7,7 @@
  * @category Album_Manager
  * @package  Facebook
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://localhost/SocialManager/privacy_policy/privacy_policy.php 
+ * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
  * @link     ""
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
  * use, copy, modify, and distribute this software in source code or binary
@@ -18,7 +18,8 @@
  */
 session_start();
 unset($_SESSION['accessToken']);
-unset($_SESSION['userData']);
+unset($_SESSION['userid']);
+unset($_SESSION['email']);
 session_destroy();
 header('Location: https://localhost:8443/SociaManager/login.php');
 ?>

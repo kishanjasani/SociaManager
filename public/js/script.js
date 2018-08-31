@@ -1,4 +1,3 @@
-
 $(window).on('load',function(){
   $('.loader').css('display','none');
 })
@@ -82,6 +81,14 @@ $(document).ready(function() {
       return selected_albums;
     }
 
+    $(".single-export").on("click", function() {
+        var rel = $(this).attr("rel");
+        var album = rel.split(",");
+        append_download_link(
+          "download-album.php?single_export=" + album[0] + "," + album[1]
+        );
+    });
+
     $(".single-download").on("click", function() {
       var rel = $(this).attr("rel");
       var album = rel.split(",");
@@ -97,15 +104,15 @@ $(document).ready(function() {
       );
     });
 
-    $("#download-all-albums").on("click", function() {
+    $(".download-all-albums").on("click", function() {
       append_download_link("download-album.php?zip=1&all_albums=all_albums");
     });
 
 
     function move_to_drive(param1, param2) {
 
-        var google_access_token = $('.g-access-token').attr('id');
-        if(google_access_token !== "") {
+        var google_access_token = $('.g-access-token').text();
+        if(google_access_token === "Hello") {
             $('.download-process').css('display','block');
             $('.loadermessage').text("Please wait... File is moving in to google drive");
             $.ajax({
@@ -131,9 +138,29 @@ $(document).ready(function() {
         move_to_drive("selected_albums", selected_albums);
     });
 
-    $("#move_all").on("click", function() {
+    $(".move_all").on("click", function() {
         move_to_drive("all_albums", "all_albums");
     });
+
+    $("#uploadimage").on('submit',(function(e) {
+        e.preventDefault();
+        $('.download-process').css('display','block');
+        $('.loadermessage').text("Please wait... Album photo uploading!!");
+        $.ajax({
+            url: "ajax_php_file.php", // Url to which the request is send
+            type: "POST",             // Type of request to be send, called as method
+            data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            contentType: false,       // The content type used when sending data to the server.
+            cache: false,             // To unable request pages to be cached
+            processData:false,        // To send DOMDocument or non processed data file it is set to false
+            success: function(data)   // A function to be called if request succeeds
+            {
+              $('.download-process').css('display','none');
+              $(".modal-content").html(result);
+              $('#modal').modal('open');
+            }
+        });
+    }));
 
 });
 

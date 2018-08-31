@@ -8,7 +8,7 @@
  * @category Album_Manager
  * @package  Facebook
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://localhost/SocialManager/privacy_policy/privacy_policy.php 
+ * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
@@ -21,8 +21,10 @@
 require_once "fb-callback.php";
 
 $zip_folder = "";
-$album_download_directory = 'public/' . uniqid() . '/';
+$album_download_directory = 'public/'.uniqid().'/';
 mkdir($album_download_directory, 0777, true);
+
+$main_arr = array();
 
 /**
  * It will downloads the album from facebook
@@ -33,7 +35,7 @@ mkdir($album_download_directory, 0777, true);
  * @param String $album_name               Album name
  * @param String $fb                       Facebook Object
  * 
- * @return ""
+ * @return "Downloaded Album"
  */
 function Download_album(
     $accessToken, 
@@ -42,22 +44,76 @@ function Download_album(
     $album_name, 
     $fb
 ) {
-    $request_album_photos = $fb->get($album_id . "/photos?fields=source", $accessToken); //photos?fields=source
-    $album_photos=$request_album_photos->getGraphEdge()->asArray();
-
     $album_directory = $album_download_directory.$album_name;
     if (!file_exists($album_directory)) {
-            mkdir($album_directory, 0777);
+         mkdir($album_directory, 0777);
     }
 
-    $i = 1;
-    foreach ( $album_photos as $album_photo ) {
+    $request_albums_photo = $fb->get($album_id . "/photos?fields=images&limit=5", $accessToken);
+    $arr_alb = $request_albums_photo->getGraphEdge();
+    
+    $i = 0;
+    $resultAlbum = getAlbum($fb, $arr_alb, $i);
+    $count = 1;
+    foreach ($resultAlbum as $album_photo) {
         file_put_contents(
-            $album_directory.'/'.$i.".jpg", 
-            fopen($album_photo['source'], 'r')
+            $album_directory . "/" . $count . ".jpg", 
+            fopen($album_photo['images'], 'r')
         );
+        $count++;
+    }
+}
+
+/**
+ * It will export the album from facebook and puut it into json file
+ * 
+ * @param String $accessToken acess token for the access albums
+ * @param String $album_id    Id of ther album 
+ * @param String $album_name  Album name
+ * @param String $fb          Facebook Object
+ * 
+ * @return "Exported Albums"
+ */
+function Export_album($accessToken, $album_id, $album_name, $fb) 
+{
+    $request_albums_photo = $fb->get($album_id ."/photos?fields=images&limit=5", $accessToken);
+    $arr_alb = $request_albums_photo->getGraphEdge();
+    $i = 0;
+    $resultAlbum = getAlbum($fb, $arr_alb, $album_name, $i);
+    
+    $response_json = json_encode(array($album_name => $resultAlbum), JSON_PRETTY_PRINT);
+    $jsonFilename = './public/jsonData/fb-album_'.date("Y-m-d").'_'.date("H-i-s").'.json';
+    $jsonFile = fopen($jsonFilename, "a") or die("Unable to open file!");
+    fwrite($jsonFile, $response_json);
+    fclose($jsonFile);
+    
+    echo '<a href="' . $jsonFilename . '" id="download-link" target="_blank" class="btn" >See JSON File</a>';
+} 
+
+
+/**
+ * It will fetch all the album from the facebook and put it in array
+ * 
+ * @param String $fb         Facebook Object
+ * @param String $arr_alb    limited array of the album
+ * @param String $album_name Album name
+ * @param String $i          taking care of index value of array 
+ * 
+ * @return "Get Albums array"
+ */
+function getAlbum($fb, $arr_alb, $album_name, $i)
+{
+    global $main_arr;
+    
+    foreach ($arr_alb as $graphNode) {
+        $main_arr[$i]['images'] = $graphNode['images'][0]['source'];
         $i++;
     }
+    $arr_alb_ar = $fb->next($arr_alb);
+    if (!empty($arr_alb_ar)) {
+        getAlbum($fb, $arr_alb_ar, $album_name, $i);
+    }
+    return $main_arr;
 }
 
 //---------- For 1 album download -------------------------------------------------//
@@ -104,6 +160,17 @@ if (isset($_GET['all_albums']) && !empty($_GET['all_albums'])) {
             }
         }
     }
+}
+
+//---------------Export Single album-------------------------//
+if (isset($_GET['single_export']) && !empty($_GET['single_export'])) {
+    $single_album = explode(",", $_GET['single_export']);
+    Export_album(
+        $accessToken,  
+        $single_album[0], 
+        $single_album[1],
+        $fb
+    );
 }
 
 if (isset($_GET['zip'])) {

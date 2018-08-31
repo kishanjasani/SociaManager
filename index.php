@@ -7,7 +7,7 @@
  * @category Album_Manager
  * @package  Facebook
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://localhost/SocialManager/privacy_policy/privacy_policy.php 
+ * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
@@ -19,12 +19,12 @@
  */
 require_once "fb-callback.php";
 $response = $fb->get(
-    "/me?fields=id,first_name,last_name,email,picture,albums{picture,name}", 
+    "/me?fields=id,first_name,last_name,email,picture.type(large),albums{picture,name}", 
     $accessToken
 );
 $userData = $response->getGraphNode()->asArray();
 $_SESSION['userid'] = $userData['id'];
-$_SESSION['email'] = $userData['email'];
+$_SESSION['email']=$userData['email'];
 ?>
 
 <!DOCTYPE html>
@@ -58,10 +58,10 @@ $_SESSION['email'] = $userData['email'];
                   </a>
                   <ul class="right hide-on-med-and-down">
                       <li>
-                        <a href="#" class="btn green lighen-1 waves-effect waves-light" id= "download-all-albums">Download All</a>
+                        <a href="#" class="btn green lighen-1 waves-effect waves-light download-all-albums" >Download All</a>
                       </li>
                       <li>
-                        <a href="#" class="btn  lime  waves-effect waves-light" id="move_all">Move All</a>
+                        <a href="#" class="btn  lime  waves-effect waves-light move_all">Move All</a>
                       </li>
                       <li>
                         <a href="https://localhost:8443/SociaManager/logout.php" class="">Logout</a>
@@ -70,13 +70,14 @@ $_SESSION['email'] = $userData['email'];
               </div>    
             <div class="nav-content center selectedAlbums">          
                 <div class="row center">
-                    <div class="col s6"></div>
-                    <div class="col s6 ">
+                <center>
+                    <div class="col s12">
                         <a href="#Contact" class="btn-large grey darken-3 waves-effect waves-light" id="download-selected-albums">
                           <i class="material-icons left">send</i> Download Selected</a>
                         <a href="#Contact" class="btn-large amber darken-3 waves-effect waves-light" id="move-selected-albums">
-                          <i class="material-icons left">send</i> Move Selected</a>
+                          <i class="material-icons left">send</i> Move Selected...!!</a>
                     </div>
+                </center>
                 </div>
             </div>
           </div>
@@ -93,7 +94,7 @@ $_SESSION['email'] = $userData['email'];
                     <img src="<?php echo $userData['picture']['url'] ?>" alt="Profile Picture" class="circle">
                   </a>
                   <a href="#">
-                    <span class="name white-text"><?php echo $userData['first_name'] . " " . $userData['last_name'] ?></span>
+                    <span class="name white-text"><?php echo $userData['first_name'] ." ".$userData['last_name'] ?></span>
                   </a>
                   <a href="#">
                     <span class="email white-text"><?php echo $userData['email'] ?></span>
@@ -101,10 +102,10 @@ $_SESSION['email'] = $userData['email'];
               </div>
           </li>                  
           <li>
-              <a href="#" class="btn grey darken-3 waves-effect waves-light" id= "download-all-albums">Download All Album</a>
+              <a href="#" class="btn grey darken-3 waves-effect waves-light download-all-albums" >Download All Album</a>
           </li>
           <li>
-              <a href="#" class="btn grey darken-3 waves-effect waves-light" id="move_all">Move All Album</a>
+              <a href="#" class="btn grey darken-3 waves-effect waves-light move_all" >Move All Album</a>
           </li>
           <li>
             <div class="divider"></div>
@@ -124,9 +125,9 @@ $_SESSION['email'] = $userData['email'];
                 <div class="col m6">
                   <center>
                     <div class="profilepic">
-                      <img style="margin-top: 40px; margin-left:55px;" src="<?php echo $userData['picture']['url'] ?>" alt="Profile Picture" class="materialboxed circle responsive-img">
+                      <img style="margin-top: 100px;" height="100" width="100" src="<?php echo $userData['picture']['url'] ?>" alt="Profile Picture" class="materialboxed circle responsive-img">
                     </div>
-                    <p class="center teal-text" style="font-size: 25px;"><strong><?php echo $userData['first_name'] . " " . $userData['last_name'] ?></strong><p>            
+                    <p class="center teal-text" style="font-size: 25px;"><strong><?php echo $userData['first_name'] ." ". $userData['last_name'] ?></strong><p>            
                   <center>
                 </div>
                 <div class="col l6 profile-detaile">
@@ -173,11 +174,29 @@ $_SESSION['email'] = $userData['email'];
                         </div>
                         <div class="card-content">
                           <center>
-                              <button type="button" rel="<?php echo $albumm['id'] . ',' . $albumm['name']; ?>" class="btn waves-effect waves-light red single-download"><i class="material-icons">get_app</i></button><br/><br/>
-                              <input type="checkbox"  class="select-album" value="<?php echo $albumm['id'] . ',' . $albumm['name']; ?>" class="filled-in" />
+                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light red single-download"><i class="material-icons">get_app</i></button><br/><br/>
+                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light single-export">Export Album</button><br/><br/>
+                              
+                              <input type="checkbox"  class="select-album" value="<?php echo $albumm['id'].','.$albumm['name'];?>" class="filled-in" />
                               <br/>
-                              <span class="card-title"><?php echo $albumm['name']; ?></span>
-                              <button type="button" rel="<?php echo $albumm['id'] . ',' . $albumm['name']; ?>" class="btn waves-effect waves-light blue move-single-album">Move to Drive</button>
+                              <span class="card-title"><?php echo $albumm['name'];?></span>
+                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light blue move-single-album">Move to Drive</button>
+                              <br/>
+                              <!-- <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
+                                <center>
+                                    <div class="file-field input-field">
+                                        <div class="btn btn-floating green">
+                                            <span><i class="material-icons center">add_box</i></span>
+                                            <input type="file" id="file">
+                                        </div>
+                                        <div style="padding-left: 10px;">
+                                            <button type="submit" class="btn green">Add album</button>
+                                        </div>
+                                    </div>
+                                </center>
+                              </form> -->
+
+                              <br/>
                           </center>
                         </div>
                     </div>
@@ -220,13 +239,13 @@ $_SESSION['email'] = $userData['email'];
     </div>
 
     <?php
-    $google_access_token = "";
+    $google_access_token= "";
     if (isset($_SESSION['google_access_token'])) {
         $google_access_token = $_SESSION['google_access_token'];
     } 
     ?>
 
-    <div id="<?php echo $google_access_token ?>" class="g-access-token"></div>
+    <div id="" class="g-access-token"><?php if($google_access_token) echo "Hello"; else echo ""; ?></div>
 
     <!-- Footer -->
 

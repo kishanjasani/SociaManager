@@ -9,7 +9,7 @@
  * @category Album_Manager
  * @package  Zipper
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://localhost/SocialManager/privacy_policy/privacy_policy.php 
+ * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
@@ -45,9 +45,8 @@ class Zipper
             foreach ($files as $file) {
                 $file = str_replace('\\', '/', $file);
                 // Ignore "." and ".." folders
-                if (in_array(substr($file, strrpos($file, '/') + 1), array('.', '..'))) {
-                                    continue;
-                }
+                if (in_array(substr($file, strrpos($file, '/') + 1), array('.', '..')))
+                    continue;
                 $file = realpath($file);
                 if (is_dir($file) === true) {
                     $a[] = array(
@@ -123,7 +122,7 @@ class Zipper
                         $zip->addEmptyDir(end($dir));
                     } else {
                         $zip->addFromString(
-                            end($dir) . '/' . $i . '.jpg', 
+                            end($dir).'/'.$i.'.jpg', 
                             file_get_contents($entry['file'])
                         );
                         $i++;
@@ -167,10 +166,9 @@ class Zipper
         $zipfilename = "";
         if (isset($album_download_directory)) {
             //$zipfilename = 'libs/resources'.DIRECTORY_SEPARATOR.'albums'.DIRECTORY_SEPARATOR.'fb-album_'.date("Y-m-d").'_'.date("H-i-s");
-            $zipfilename = 'public/fb-album_' . date("Y-m-d") . '_' . date("H-i-s");
-            // name of folder starting from the root of the webserver
-            // as in Wordpress /wp-content/themes/ (end on backslash)
-            $folder = dirname($_SERVER['PHP_SELF']) . '/' . $album_download_directory;
+            $zipfilename = 'public/fb-album_'.date("Y-m-d").'_'.date("H-i-s");
+            
+            $folder = dirname($_SERVER['PHP_SELF']).'/'.$album_download_directory;
             // Server Root
             $root = $_SERVER["DOCUMENT_ROOT"];
             // source of the folder to unpack

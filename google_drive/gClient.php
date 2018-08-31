@@ -8,7 +8,7 @@
  * @category Album_Manager
  * @package  Zipper
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://localhost/SocialManager/privacy_policy/privacy_policy.php 
+ * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
@@ -18,7 +18,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
  */
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 session_start();
 /**
  * Create a google Client for move album to Drive
@@ -34,7 +34,7 @@ class CreateGoogleClient
     function createClient()
     {
         $client = new Google_Client();
-        $client->setAuthConfigFile('../client_secrets.json');
+        $client->setAuthConfigFile('../client_secret.json');
         $client->setAccessType("offline");
         $client->setIncludeGrantedScopes(true);
         $client->addScope(Google_Service_Drive::DRIVE);
