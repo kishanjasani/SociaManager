@@ -31,7 +31,7 @@ class Zipper
      * 
      * @param String $source Source of the folder
      * 
-     * @return ""
+     * @return $a
      */
     public function loadZipFiles($source) 
     {
@@ -159,7 +159,7 @@ class Zipper
      * 
      * @param String $album_download_directory folder will be zip 
      * 
-     * @return "$zipfilename"
+     * @return $zipfilename
      */
     public function makeZip($album_download_directory) 
     {
@@ -205,7 +205,7 @@ class Zipper
      * 
      * @param String $album_download_directory folder will be zip 
      * 
-     * @return "$response"
+     * @return $response
      */
     public function getZip($album_download_directory) 
     {
