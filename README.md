@@ -7,6 +7,7 @@ Live Application Demo - https://rtfbchallenge.000webhostapp.com/
 
 This is a core php Application with expressive, elegant syntax which  allows a user to do following activities:
 
+## Login with facebook
 - User Login using Facebook credentials and Ask user to give permission to access the email,name and photos. 
 Application fetches all Albums which is added by user or in which user is tagged.
 
