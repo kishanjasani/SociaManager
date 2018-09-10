@@ -47,7 +47,7 @@ if (isset($_SESSION['accessToken'])) {
     $tokenMetadata = $oAuth2Client->debugToken($accessToken);
 
     // Validation (these will throw FacebookSDKException's when they fail)
-    $tokenMetadata->validateAppId('185496088823715'); // Replace {app-id} with your app id
+    $tokenMetadata->validateAppId('XXXXXXXXXXXX'); // Replace {app-id} with your app id
     // If you know the user ID this access token belongs to, you can validate it here
     $tokenMetadata->validateExpiration();
 
