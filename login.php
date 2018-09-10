@@ -7,7 +7,7 @@
  * @category Album_Manager
  * @package  Facebook
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
+ * @license  https://rtfbchallenge.tk/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
@@ -23,7 +23,7 @@ if (isset($_SESSION['accessToken'])) {
     header('Location: https://localhost:8443/SociaManager/index.php'); 
     exit();
 }
-$permissions = ['email','user_gender','user_location','user_photos'];
+$permissions = ['email','user_photos'];
 $loginUrl = $helper->getLoginUrl(
     'https://localhost:8443/SociaManager/index.php', 
     $permissions
