@@ -20,6 +20,5 @@ session_start();
 unset($_SESSION['accessToken']);
 unset($_SESSION['userid']);
 unset($_SESSION['email']);
-session_destroy();
 header('Location: https://localhost:8443/SociaManager/login.php');
 ?>
