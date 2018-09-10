@@ -7,7 +7,7 @@
  * @category Album_Manager
  * @package  Facebook
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
+ * @license  https://rtfbchallenge.tk/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
@@ -146,6 +146,13 @@ $_SESSION['email']=$userData['email'];
                           <tr>
                               <td></td>
                               <td><label class="teal-text" for="email">Email</label></td>
+                              <?php 
+                                    if (isset($userData['email'])) { 
+                                        $email = $userData['email'];
+                                    } else { 
+                                        $email = 'Not_Found'; 
+                                    }
+                                ?>
                               <td><input type="text" id="email" value="<?php echo $userData['email'] ?>" readonly></td>
                           </tr>
                       </tbody>
@@ -174,29 +181,12 @@ $_SESSION['email']=$userData['email'];
                         </div>
                         <div class="card-content">
                           <center>
-                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light red single-download"><i class="material-icons">get_app</i></button><br/><br/>
-                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light single-export">Export Album</button><br/><br/>
-                              
-                              <input type="checkbox"  class="select-album" value="<?php echo $albumm['id'].','.$albumm['name'];?>" class="filled-in" />
-                              <br/>
                               <span class="card-title"><?php echo $albumm['name'];?></span>
+                              <input type="checkbox"  class="select-album" value="<?php echo $albumm['id'].','.$albumm['name'];?>" class="filled-in" /><br/>
+                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light red single-download"><i class="material-icons">get_app</i></button><br/><br/>
+                              <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light single-export">Export Album</button><br/><br/>            
+                              
                               <button type="button" rel="<?php echo $albumm['id'].','.$albumm['name'];?>" class="btn waves-effect waves-light blue move-single-album">Move to Drive</button>
-                              <br/>
-                              <!-- <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
-                                <center>
-                                    <div class="file-field input-field">
-                                        <div class="btn btn-floating green">
-                                            <span><i class="material-icons center">add_box</i></span>
-                                            <input type="file" id="file">
-                                        </div>
-                                        <div style="padding-left: 10px;">
-                                            <button type="submit" class="btn green">Add album</button>
-                                        </div>
-                                    </div>
-                                </center>
-                              </form> -->
-
-                              <br/>
                           </center>
                         </div>
                     </div>
@@ -210,8 +200,7 @@ $_SESSION['email']=$userData['email'];
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="overlay-content">
                 <div class="slideshow-container">
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    
                 </div>
             </div>
         </div>
