@@ -8,7 +8,7 @@
  * @category Album_Manager
  * @package  Facebook
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
+ * @license  https://rtfbchallenge.tk/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
@@ -44,12 +44,13 @@ function Download_album(
     $album_name, 
     $fb
 ) {
+    global $main_arr;
     $album_directory = $album_download_directory.$album_name;
     if (!file_exists($album_directory)) {
-         mkdir($album_directory, 0777);
+         @mkdir($album_directory, 0777) || exit("Coudn't able to create directory");
     }
 
-    $request_albums_photo = $fb->get($album_id . "/photos?fields=images&limit=5", $accessToken);
+    $request_albums_photo = $fb->get($album_id . "/photos?fields=images&limit=100", $accessToken);
     $arr_alb = $request_albums_photo->getGraphEdge();
     
     $i = 0;
@@ -62,6 +63,7 @@ function Download_album(
         );
         $count++;
     }
+    $main_arr = array();
 }
 
 /**
@@ -76,7 +78,7 @@ function Download_album(
  */
 function Export_album($accessToken, $album_id, $album_name, $fb) 
 {
-    $request_albums_photo = $fb->get($album_id . "/photos?fields=images&limit=5", $accessToken);
+    $request_albums_photo = $fb->get($album_id . "/photos?fields=images&limit=100", $accessToken);
     $arr_alb = $request_albums_photo->getGraphEdge();
     $i = 0;
     $resultAlbum = getAlbum($fb, $arr_alb, $album_name, $i);
@@ -125,11 +127,12 @@ if (isset($_GET['single_album']) && !empty($_GET['single_album'])) {
         $single_album[1], 
         $fb
     );
+    zipFolder($album_download_directory);
 }
 
 //---------- For Selected Albums download -----------------------------------------//
 if (isset($_GET['selected_albums']) && !empty($_GET['selected_albums'])) {
-    $selected_albums = explode("/", $_GET['selected_albums']);
+    $selected_albums = explode("-", $_GET['selected_albums']);
     foreach ($selected_albums as $selected_album) {
         $selected_album = explode(",", $selected_album);
         Download_album(
@@ -140,6 +143,7 @@ if (isset($_GET['selected_albums']) && !empty($_GET['selected_albums'])) {
             $fb
         );
     }
+    zipFolder($album_download_directory);
 }
 
 //---------- Download all album code --------------------------------------//
@@ -157,6 +161,7 @@ if (isset($_GET['all_albums']) && !empty($_GET['all_albums'])) {
                     $fb
                 );
             }
+            zipFolder($album_download_directory);
         }
     }
 }
@@ -172,9 +177,11 @@ if (isset($_GET['single_export']) && !empty($_GET['single_export'])) {
     );
 }
 
-if (isset($_GET['zip'])) {
-    include_once 'zipper.php';
-    $zipper = new Zipper();
-    echo $zipper->getZip($album_download_directory);
+function zipFolder($album_download_directory){
+    if (isset($_GET['zip'])) {
+        include_once 'zipper.php';
+        $zipper = new Zipper();
+        echo $zipper->getZip($album_download_directory);
+    }
 }
 ?>
