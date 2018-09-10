@@ -21,7 +21,7 @@ require_once "fb-callback.php";
 
 if (isset($_GET['albumId'])) {
     $albumId = $_GET['albumId'];
-    $response_albums = $fb->get($albumId . "/photos?fields=images,id&limit=500", $accessToken);
+    $response_albums = $fb->get($albumId . "/photos?fields=images,id&limit=100", $accessToken);
     $albums = $response_albums->getGraphEdge()->asArray(); 
     $slides = ""; 
     foreach ($albums as $album) {

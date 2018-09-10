@@ -9,7 +9,7 @@
  * @category Album_Manager
  * @package  Zipper
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
+ * @license  https://rtfbchallenge.tk/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
@@ -47,8 +47,8 @@ class Zipper
                 // Ignore "." and ".." folders
                 if (in_array(substr($file, strrpos($file, '/') + 1), array('.', '..')))
                     continue;
-                $file = realpath($file);
                 if (is_dir($file) === true) {
+                    $file = str_replace("/var/www/html/public/","",$file);
                     $a[] = array(
                     'type' => 'dir',
                     'source' => str_replace($source . '/', '', $file . '/'),
@@ -56,6 +56,7 @@ class Zipper
                     'size' => 0
                     );
                 } else if (is_file($file) === true) {
+                    $file = str_replace("/var/www/html/public/","",$file);
                     $src = str_replace($source . '/', '', $file);
                     $size = filesize($file);
                     $a[] = array(
@@ -213,7 +214,7 @@ class Zipper
         if (isset($album_download_directory)) {
             $zip_folder = $this->makeZip($album_download_directory);
             if (!empty($zip_folder)) {
-                $response = '<a href="' . $zip_folder . '.zip" id="download-link" target="_blank" class="btn" >Download Zip Folder</a>';
+                $response = $zip_folder;
             }
         }
         return $response;
