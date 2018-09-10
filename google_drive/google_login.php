@@ -21,11 +21,11 @@
 ini_set('max_execution_time', 999999);
 require_once __DIR__.'/gClient.php';
 require_once "../fb-callback.php";
-
+$main_arr = array();
 $gClient =new CreateGoogleClient();
 $client = $gClient->createClient();
 
-if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token']) {
+if (isset($_SESSION['google_access_token'])) {
     $client->setAccessToken($_SESSION['google_access_token']);
 
     $drive = new Google_Service_Drive($client);
@@ -55,7 +55,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
      */
     function moveToDrive($accessToken, $albumId, $albumName, $fb, $drive, $parentFolderId) 
     {
-
+        global $main_arr;
         $fileMetadata = new Google_Service_Drive_DriveFile(
             array(
             'name' => $albumName,
@@ -94,6 +94,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
             }
             $count++;
         }
+        $main_arr = array();
     }
 
     function getAlbum($fb,$arr_alb,$i)
@@ -139,7 +140,7 @@ if (isset($_SESSION['google_access_token']) && $_SESSION['google_access_token'])
                 $parentFolderId
             );
         }
-        $response = "Your Albums successfully backuped!!!";
+        $response = "Your Selected Albums successfully backuped!!!";
         echo $response;
     }
 
