@@ -25,6 +25,16 @@ $(document).ready(function() {
               $('.overlay').css('width','100%');
               $('.slideshow-container').html(result);
               flag = 1;
+              y = 1;
+              timer = setInterval(function displaySlider(){
+                  var slides = document.getElementsByClassName("mySlides");
+                  showSlides(slideIndex = y);
+                  y++;
+                  if (y > slides.length) {
+                      slideIndex = 1
+                      y = 1;
+                  }    
+              }, 3000);
             }
         });
       })
@@ -36,6 +46,35 @@ $(document).ready(function() {
       $.ajax({
         url: url,
         success: function(result) {
+          $('.download-process').css('display','none');
+          $(".modal-content").html('<a href="'+ result +'.zip" id="download-link" target="_blank" class="btn" >Download Zip Folder</a> <p> & Mail has been send to your email which is linked with facebook</p>');
+          $('#modal').modal('open');
+          var email = $("#email").val();
+          var name = $("#firstName").val() +" "+ $("#lastName").val();
+          if(email && email !== 'Not_Found') {
+            $.ajax({
+              type: 'POST',
+              url: "email.php",
+              data: { 
+                'emailId': email, 
+                'name': name,
+                'albumLocation': result
+              },
+              success: function(response) {
+              }
+            });
+          }
+        }
+      });
+    }
+
+    function append_json_link(url) {
+      $('.download-process').css('display','block');
+      $('.loadermessage').text("Please wait... Albums are downloading");
+      $.ajax({
+        url: url,
+        success: function(result) {
+          //console.log("Success");
           $('.download-process').css('display','none');
           $(".modal-content").html(result);
           $('#modal').modal('open');
@@ -84,7 +123,7 @@ $(document).ready(function() {
     $(".single-export").on("click", function() {
         var rel = $(this).attr("rel");
         var album = rel.split(",");
-        append_download_link(
+        append_json_link(
           "download-album.php?single_export=" + album[0] + "," + album[1]
         );
     });
@@ -109,14 +148,14 @@ $(document).ready(function() {
     });
 
 
-    function move_to_drive(param1, param2) {
+    function move_to_drive(albums, albumVal) {
 
         var google_access_token = $('.g-access-token').text();
         if(google_access_token === "Hello") {
             $('.download-process').css('display','block');
             $('.loadermessage').text("Please wait... File is moving in to google drive");
             $.ajax({
-                url: "https://localhost:8443/SociaManager/google_drive/google_login.php?" + param1 + "=" + param2,
+                url: "https://localhost:8443/SociaManager/google_drive/google_login.php?" + albums + "=" + albumVal,
                 success: function (result) {
                     $('.download-process').css('display','none');
                     $(".modal-content").html(result);
@@ -147,8 +186,12 @@ $(document).ready(function() {
 // Slider Script in vanilla java script
 
 var flag =0;
+var timer;
+var y;
 function closeNav() {
   document.getElementById("myNav").style.width = "0%";
+  clearInterval(timer);
+  slideIndex = 1;
 }
 
 var slideIndex = 1;
@@ -161,17 +204,6 @@ function plusSlides(n) {
 function currentSlide(n) {
   showSlides(slideIndex = n);
 }
-
-var y = 0;
-setInterval(function displaySlider(){
-    var slides = document.getElementsByClassName("mySlides");
-    showSlides(slideIndex = y);
-    y++;
-    if (y > slides.length) {
-        slideIndex = 1
-        y = 1;
-    }    
-}, 3000);
 
 function showSlides(n) {
   var i;
