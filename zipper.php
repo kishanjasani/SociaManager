@@ -48,7 +48,6 @@ class Zipper
                 if (in_array(substr($file, strrpos($file, '/') + 1), array('.', '..')))
                     continue;
                 if (is_dir($file) === true) {
-                    $file = str_replace("/var/www/html/public/","",$file);
                     $a[] = array(
                     'type' => 'dir',
                     'source' => str_replace($source . '/', '', $file . '/'),
@@ -56,7 +55,6 @@ class Zipper
                     'size' => 0
                     );
                 } else if (is_file($file) === true) {
-                    $file = str_replace("/var/www/html/public/","",$file);
                     $src = str_replace($source . '/', '', $file);
                     $size = filesize($file);
                     $a[] = array(
