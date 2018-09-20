@@ -29,6 +29,8 @@ if (isset($_GET['albumId'])) {
         $slides .= '<div class="mySlides fade">';
         $slides .= '<img src="'. $albumUrl .'" style="width:100%; height: 450px"></div>';
     }
+    $slides .= '<a class="prev" onclick="plusSlides(-1)">&#10094;</a>';
+    $slides .= '<a class="next" onclick="plusSlides(1)">&#10095;</a>';
     echo $slides;
 }
 
