@@ -40,11 +40,14 @@ Application fetches all Albums which is added by user or in which user is tagged
     > After downloading the album the user gets an email "Your album are downloaded successfully".. and also in mail you get a button of "Download albums". On clicking of that you can download albums.
 
     > Albums will stay 30 days on server. After 30 day album will destroy from the server.
-    ***About Background Job***
-    > On Move to drive Button click, Server will initiate background job to move facebook album into your google drive.
-    > Once background job is initiated, you can turn off your machine or internet connection. Gearman server will do it for you.
-    > You can run 3 background process simuntaneously to move your album to google drive. And other will in queue. When current running process is done then other process will start executing in background one by one.
-    > Here we have used a **Gearman Server For Background Job** processing. If you want to implement our project on your server than You have to setup gearman server and **supervisor** up and running.
+
+**About Background Job** : 
+
+> - On Move to drive Button click, Server will initiate background job to move facebook album into your google drive.
+> - Once background job is initiated, you can turn off your machine or internet connection. Gearman server will do it for you.
+> - You can run 3 background process simuntaneously to move your album to google drive. And other will in queue. When current running process is done then other process will start executing in background one by one.
+> - Here we have used a **Gearman Server For Background Job** processing. If you want to implement our project on your server than You have to setup gearman server and **supervisor** up and running.
+
 
 Library Used:
 ==========================================================
@@ -125,7 +128,7 @@ to
             'default_graph_version' => 'v2.2',
         ]);
 
-> **Gearman Server Configuration** : You have to put "worker.conf" configuration file in Supervisor installation directory. (Hint : In Ubuntu "etc/supervisor/conf.d")
+> **Supervisor Configuration** : You have to put "worker.conf" configuration file in Supervisor installation directory. (Hint : In Ubuntu "etc/supervisor/conf.d")
 
 > **For the email configuration** (If you are using google's smtp) : You need to first setup seperate app password in your google account. and use that password in your email.php
 
