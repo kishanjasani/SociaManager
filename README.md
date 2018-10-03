@@ -99,7 +99,7 @@ NOTE : even if localhost url also works but you have to use "https" protocol.
 ## Now Download or Clone our app from github
 => put this in root directory(Wamp => www, xampp => htdocs)
 => unzip it.
-In the project's root directory download Facebook PHP SDK For that..
+In the project's root directory download Facebook PHP SDK For that.. And Google Client Api
 
 Run this command:
 ```sh
