@@ -6,9 +6,9 @@
  * It will Zip the file
  * 
  * @category Album_Manager
- * @package  Zipper
+ * @package  Google
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://rtfbchallenge.tk/privacy_policy/privacy_policy.php 
+ * @license  https://fbrtchallenge.tk/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
