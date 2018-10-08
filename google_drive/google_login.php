@@ -3,12 +3,12 @@
  * Copyright 2018 Social Manager.
  * PHP version 7.2.8
  *
- * It will Zip the file
+ * It will move your album to google drive
  * 
  * @category Album_Manager
- * @package  Zipper
+ * @package  Google
  * @author   Kishan Jasani <kishanjasani007@yahoo.in>
- * @license  https://rtfbchallenge.000webhostapp.com/privacy_policy/privacy_policy.php 
+ * @license  https://fbrtchallenge.tk/privacy_policy/privacy_policy.php 
  * @link     ""
  * 
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
