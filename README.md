@@ -109,8 +109,7 @@ composer require google/apiclient:"^2.0"
 Or
 
 if you are using my project then you just have use `composer install ` command.
-<p><b>NOTE : you have to make changes in facebook graph api's => Facebook/Helpers/FacebookRedirectLoginHelper.php file
-in that you have to make changes</b></p>
+<p><b>NOTE : you have to make changes in facebook graph api's => Facebook/Helpers/FacebookRedirectLoginHelper.php file.</b></p>
 
 `$redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['code', 'state']);`
 
