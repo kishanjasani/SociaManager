@@ -3,7 +3,7 @@
  * Copyright 2018 Social Manager.
  * PHP version 7.2.8
  *
- * It will Zip the file
+ * It will check your credentials
  * 
  * @category Album_Manager
  * @package  Zipper
