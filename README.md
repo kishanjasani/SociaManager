@@ -3,8 +3,6 @@
 [![Build Status](https://scrutinizer-ci.com/g/kishanjasani/SociaManager/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kishanjasani/SociaManager/build-status/master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/kishanjasani/SociaManager/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 
-Live Application Demo - https://fbrtchallenge.tk
-
 This is a core php Application with expressive, elegant syntax which  allows a user to do following activities:
 
 ## Login with facebook
